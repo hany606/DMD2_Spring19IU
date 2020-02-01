@@ -1,2 +1,2 @@
-# DMD2_Spring19IU
-This is a repository for Data Modeling and Database 2 course Spring19 Innopolis University. The repository contains all coursework and assignment.
+# DMD2_Spring20IU
+This is a repository for Data Modeling and Database2 course Spring20 Innopolis University. The repository contains all coursework and assignment.
