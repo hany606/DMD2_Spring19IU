@@ -1,3 +1,3 @@
-# Week2
+# Week1
 
-Using Redis DB
+Using MongoDB
