@@ -2,7 +2,9 @@
 
 (1) Execute ``` sudo -u postgres psql -U postgres -d dvdrental -f ../assignment_assests/dvdrental-database/postgree/restore.sql ```
 
-(2) Execute ```python3 migration.py```
+(2) Execute ```mongod```
+
+(3) Execute ```python3 migration.py```
 
 
 ### Some problems appeared:
