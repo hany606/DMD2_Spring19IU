@@ -1,6 +1,2 @@
-1- set the correct path for the copy files
-	Solve the problem of the permission for read
-2- (Migration step) Get the records in the database from each table and 
-   add them as json to mongodb
 3- Write the queries for mongodb
 4- Write the report

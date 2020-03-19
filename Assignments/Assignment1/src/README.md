@@ -1,4 +1,4 @@
-# Sourc files
+# SourcCodes
 
 (1) Execute ``` sudo -u postgres psql -U postgres -d dvdrental -f ../assignment_assests/dvdrental-database/postgree/restore.sql ```
 
@@ -11,4 +11,6 @@
 
 - https://stackoverflow.com/questions/19463074/postgres-error-could-not-open-file-for-reading-permission-denied
 
--https://mkyong.com/mongodb/mongodb-failed-to-unlink-socket-file-tmpmongodb-27017/ 
+- https://mkyong.com/mongodb/mongodb-failed-to-unlink-socket-file-tmpmongodb-27017/ 
+
+- https://stackoverflow.com/questions/7948789/mongod-complains-that-there-is-no-data-db-folder

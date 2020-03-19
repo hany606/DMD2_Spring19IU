@@ -1,24 +1,23 @@
+# ---------------------------------------------------------------------------------------------------
+# Author: Hany Hamed
+# Description: Migration code from postgres to MongoDB [for Assignment 1 for DMD2 course]
+# Sources:
+# - https://stackoverflow.com/questions/10598002/how-do-i-get-tables-in-postgres-using-psycopg2 
+# - https://stackoverflow.com/questions/10252247/how-do-i-get-a-list-of-column-names-from-a-psycopg2-cursor
+# ---------------------------------------------------------------------------------------------------
+
+from utils import *
 import psycopg2
 from psycopg2 import Error
-
-from pymongo import MongoClient
-import pymongo
-
 from bson.decimal128 import Decimal128
 from bson import decode_all
 from bson import json_util
-
 import datetime
-
 import decimal
+# from tqdm import tqdm
 
-user = "postgres"
-password = "hany123456"
-host = "127.0.0.1"
-port = "5432"
-database = "dvdrental"
 
-def init_postgresdb():
+def init_postgresdb(user, password, host, port, database):
     connection = psycopg2.connect( user = user,
                                     password = password,
                                     host = host,
@@ -28,12 +27,6 @@ def init_postgresdb():
     cursor = connection.cursor()
     print("PostgreSQL connection is initiated")
     return connection, cursor
-
-def init_mongodb():
-    client = MongoClient("mongodb://{:}".format(host))
-    db = client[database]
-    print("MongoDB connection is initiated")
-    return client, db
 
 def getTables_psgdb(cursor):
     # Source: https://stackoverflow.com/questions/10598002/how-do-i-get-tables-in-postgres-using-psycopg2
@@ -49,7 +42,7 @@ def getRecords_psgdb(cursor, table_name):
     return rec, col
 
 def createCollection_mngdb(db, table_name):
-    collection = db["test"]
+    collection = db[table_name]
     return collection
 
 def createRecord_mngdb(collection, column, data):
@@ -71,30 +64,38 @@ def createRecord_mngdb(collection, column, data):
             record[c] = Decimal128(data[i])
             continue
         record[c] = data[i]
-    print(record)
     inserted_id = collection.insert_one(record).inserted_id
     return inserted_id
 
 
-connection_pg, cursor_pg = init_postgresdb()
+settings = get_settings()
 
-client_mngdb, db_mngdb = init_mongodb()
+connection_pg, cursor_pg = init_postgresdb(settings["user"], settings["password"], settings["host"], settings["port"], settings["database"])
+
+client_mngdb, db_mngdb = init_mongodb(settings["host"], settings["database"])
 
 # get all the tables names in postgres sql
+print("Getting all the tables from Postgres")
 tables = getTables_psgdb(cursor_pg)
-
 for t in tables:
+    print("### ",end="")
+    print("Adding '{:}' table data in mongoDB & create its own collection".format(t[0]))
     collection = createCollection_mngdb(db_mngdb, t[0])
+    print("Getting the records of the table '{:}'".format(t[0]))
     records, columns = getRecords_psgdb(cursor_pg, t[0])
+    print("Adding all the records one by one from the table '{:}' with its columns as keys".format(t[0    ]))
     for r in records:
         inserted_id = createRecord_mngdb(collection, columns, r)
-
-        # print(columns)
-        # print(r)
-        # break
-    # break
-
-
+        # print(".",end="")
+    '''
+    # Ensuring that all the records in mongodb
+    collection = db_mngdb[t[0]]
+    my_query = {}
+    document = collection.find({})
+    for x in list(document):
+        print(x)
+    print("----------------------------------------------------")
+    '''
 connection_pg.close()
 cursor_pg.close()
 
