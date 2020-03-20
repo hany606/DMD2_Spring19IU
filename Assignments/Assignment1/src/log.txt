@@ -1,0 +1,26 @@
+MongoDB connection is initiated
+### Executing Query 4
+524
+### Starting getting the best 5 categories that this customer like in descending order
+---------------------------------
+{'category': 'Animation', 'count': 3}
+---------------------------------
+---------------------------------
+{'category': 'Children', 'count': 2}
+---------------------------------
+---------------------------------
+{'category': 'Travel', 'count': 2}
+---------------------------------
+---------------------------------
+{'category': 'Family', 'count': 2}
+---------------------------------
+---------------------------------
+{'category': 'Classics', 'count': 2}
+---------------------------------
+5
+['Animation', 'Children', 'Travel', 'Family', 'Classics']
+### Finished getting the films and their category of the query
+### Starting getting the recommendations for the films according to their categories
+0
+### Finished getting the recommendations for the films according to their categories
+### Finished Execution of Query 4

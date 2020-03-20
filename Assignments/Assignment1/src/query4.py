@@ -8,87 +8,250 @@
 # (4). https://dzone.com/articles/basic-aggregation-mongodb-21
 # (5). https://www.compose.com/articles/aggregations-in-mongodb-by-example/
 # (6). https://www.isummation.com/blog/perform-inner-join-in-mongodb-using-lookup-aggregation-operator/
+# (7). https://docs.mongodb.com/manual/reference/operator/aggregation/unwind/
+# (8). https://realpython.com/python-csv/
+# (9). https://stackoverflow.com/questions/209840/convert-two-lists-into-a-dictionary
+# (10). https://stackabuse.com/reading-and-writing-json-to-a-file-in-python/
 # ---------------------------------------------------------------------------------------------------
+
+### The metric for this query:
+# The best 5 categories for him in a descending order as it is known by counting the number of films that he/she rent all over his/her time as a customer
+
 
 from utils import *
 from datetime import datetime
 import pprint
+import json
+import numpy as np
 
 
 class Query4:
     def __init__(self,db):
         self.db = db
         self.pp = pprint.PrettyPrinter()
+        self.query_number = 4
 
     def execute(self, params=None):
-        print("### Executing Query {:}".format(1))
-        self._query1()
-        print("### Finished Execution of Query {:}".format(1))
+        print("### Executing Query {:}".format(self.query_number))
+        self._query(params=params)
+        print("### Finished Execution of Query {:}".format(self.query_number))
 
-    def _query1(self,params=None):
-        def get_current_year():
-            # Source (1)
-            # Current year is the most recent record in the table rental from the rental date
-            my_query = {}
-            my_fields = {"_id":0, "rental_date": 1}
-            my_limit = 1
-            t = self.db.rental.find(my_query,my_fields).sort("rental_date", -1).limit(my_limit)
-            current_year = list(t)[0]["rental_date"].year
-            print(current_year)
-            return current_year
-
-        # Get all the customers that rented at least two different categories during the current year*.
-        current_year = str(get_current_year())
-        # Source (2,3)
-        from_dt = datetime.strptime('{:}-01-01'.format(current_year),'%Y-%m-%d')
-        to_dt = datetime.strptime('{:}-12-31'.format(current_year),'%Y-%m-%d')
-        my_pipeline = [
-                        {
-                            "$lookup":
-                            {
-                            "from": "customer",
-                            "localField": "customer_id",
-                            "foreignField": "customer_id",
-                            "as": "customer"
-                            }
-                        },
-                        {
-                            "$match": 
-                            {
-                                "rental_date": 
-                                {
-                                    "$gte":from_dt,
-                                    "$lte": to_dt,
-                                }
-                            } 
-                        }, 
-                        {"$project": {"customer" : "$customer"} }, 
-                        {
-                            "$group" : 
-                            {
-                                # "_id": "$customer.customer_id",   # For getting only the customer id not the whole info
-                                "_id": "$customer",
-                                "count": { "$sum": 1 } 
-                            } 
-                        },
-                        {
-                            "$match": 
-                            {
-                                "count" : {"$gte": 2}
-                            } 
-                        }, 
-                        {"$sort": {"count" : -1} },
-                        {"$project": {"customer":"$_id", "num_rented_movies_in_the_current_year":"$count", "_id" : 0} }    
+    def _query(self,params=None):
+        print("Customer: with id #{:}".format(params["customer_id"]))
+        print("### Starting getting the best 5 categories that this customer like in descending order")
+        # The query has been seperated to two queries as from the experiment when they were one query it took mor time as there is more columns each joint
+        my_pipeline = [                       
+            {
+                "$lookup":
+                {
+                "from": "customer",
+                "localField": "customer_id",
+                "foreignField": "customer_id",
+                "as": "customer"
+                }
+            },
+            {
+                "$unwind":"$customer"
+            },
+            {
+                "$match":
+                {
+                    "customer_id":
+                    {
+                        "$eq":params["customer_id"]
+                    }
+                }
+            },
+            {
+                "$project": {"inventory_id":1, "_id":0}
+            },
+            {
+                "$lookup":
+                {
+                "from": "inventory",
+                "localField": "inventory_id",
+                "foreignField": "inventory_id",
+                "as": "inventory"
+                }
+            },
+            {
+                "$unwind":"$inventory"
+            }, 
+            {
+                "$project": {"inventory.film_id":1, "_id":0}
+            },
+            {
+                "$lookup":
+                {
+                "from": "film",
+                "localField": "inventory.film_id",
+                "foreignField": "film_id",
+                "as": "film"
+                }
+            },
+            {
+                "$unwind":"$film"
+            }, 
+            {
+                "$project": {"film.film_id":1, "_id":0}
+            },
+            {
+                "$lookup":
+                {
+                "from": "film_category",
+                "localField": "film.film_id",
+                "foreignField": "film_id",
+                "as": "film_category"
+                }
+            },
+            {
+                "$unwind":"$film_category"
+            },
+            {
+                "$lookup":
+                {
+                "from": "category",
+                "localField": "film_category.category_id",
+                "foreignField": "category_id",
+                "as": "category"
+                }
+            },
+            {
+                "$unwind":"$category"
+            }, 
+            {
+                "$project": {"category.name":1, "_id":0}
+            },
+            {
+                "$group" : 
+                {
+                    "_id": "$category.name",
+                    "count": { "$sum": 1 } 
+                } 
+            },
+            {"$sort": {"count" : -1} },
+            {"$limit":5},
+            {"$project": {"category":"$_id", "count":"$count", "_id" : 0} }    
         ]
-        # t = self.db.rental.find(my_query,my_fields)
         a = self.db.rental.aggregate(my_pipeline)
-        results = []
+        best_categories = []
         for i in a:
-            results.append(i)
-            print("---------------------------------")
-            self.pp.pprint(i)
-            print("---------------------------------")
-        print(len(results))
+            best_categories.append(i["category"])
+        #     print("---------------------------------")
+        #     self.pp.pprint(i)
+        #     print("---------------------------------")
+        # print(len(best_categories))
+        print("Best 5 Categories: ", best_categories)
+        print("### Finished getting the films and their category of the query")
+        print("### Starting getting the recommendations for new films according to his/her history of categories")
+        my_pipeline = [                       
+            {
+                "$lookup":
+                {
+                "from": "category",
+                "localField": "category_id",
+                "foreignField": "category_id",
+                "as": "category"
+                }
+            },
+            {
+                "$unwind":"$category"
+            },
+
+            {
+                "$match":
+                {
+                    "category.name":
+                    {
+                        "$in":best_categories
+                    }
+                }
+            },
+            {
+                "$project": {"_id":0,"film_id":1, "category.name":1}
+            },
+            {
+                "$lookup":
+                {
+                "from": "film",
+                "localField": "film_id",
+                "foreignField": "film_id",
+                "as": "film"
+                }
+            },
+            {
+                "$unwind":"$film"
+            },
+            {
+                "$project": {"_id":0, "film_id":1, "film.title":1, "category.name":1}
+            },
+            {
+                "$lookup":
+                {
+                "from": "inventory",
+                "localField": "film_id",
+                "foreignField": "film_id",
+                "as": "inventory"
+                }
+            },
+            {
+                "$unwind":"$inventory"
+            }, 
+            {
+                "$project": {"_id":0, "inventory.inventory_id":1, "film_id":1, "film.title":1, "category.name":1}
+            },
+            {
+                "$lookup":
+                {
+                "from": "rental",
+                "localField": "inventory.inventory_id",
+                "foreignField": "inventory_id",
+                "as": "rental"
+                }
+            },
+            {
+                "$unwind":"$rental"
+            }, 
+            {
+                "$project": {"_id":0, "rental.rental_id":1, "rental.customer_id":1, "film_id":1, "film.title":1, "category.name":1}
+            },
+            {
+                "$match":
+                {
+                    "rental.customer_id":
+                    {
+                        "$ne":params["customer_id"]
+                    }
+                }
+            },
+            {
+                "$project": {"_id":0, "film_id":1, "film.title":1, "category.name":1}
+            },
+            {
+                "$group":
+                {
+                    "_id":{"film_id": "$film_id", "film_title":"$film.title", "category_name":"$category.name"}
+                }
+            },
+            {"$limit":10},
+            {
+                "$project": {"film_id":"$_id.film_id", "film_title":"$_id.film_title", "category_name":"$_id.category_name", "_id":0}
+            },
+
+        ]
+        a = self.db.film_category.aggregate(my_pipeline)
+        recommendations = []
+        for i in a:
+            recommendations.append(i)
+        #     print("---------------------------------")
+        #     self.pp.pprint(i)
+        #     print("---------------------------------")
+        # print(len(recommendations))
+        print("### Finished getting the recommendations for the films according to their categories")
+        print("# Recommendations #####################")
+        for i,r in enumerate(recommendations):
+            print("(*). {:} from {:} category".format(r["film_title"],r["category_name"]))
+        print("#######################################")
 
 
 if __name__ == "__main__":
@@ -97,5 +260,5 @@ if __name__ == "__main__":
     settings = get_settings()
 
     client_mngdb, db_mngdb = init_mongodb(settings["host"], settings["database"])
-    q1 = Query4(db_mngdb)
-    q1.execute()
+    q = Query4(db_mngdb)
+    q.execute(params={"customer_id":524})
