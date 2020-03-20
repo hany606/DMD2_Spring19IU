@@ -58,7 +58,6 @@ class Query2:
                         {"$sort": {"_id.actor1" : 1, "_id.actor2" : 1} },
                         {"$project": {"co_actors":"$_id", "num_films": "$num_films","_id" : 0} }    
         ]
-        # t = self.db.rental.find(my_query,my_fields)
         a = self.db.film_actor.aggregate(my_pipeline)
         results = []
         actors = []
@@ -73,15 +72,14 @@ class Query2:
         print("### Finished getting the results of the query")
         print("### Starting write the report in form of table in csv")
         actors = list(set(actors))
-        min_actor_id = int(min(actors))
         # Actor1 as row and Actor2 as column
         data = np.zeros((len(actors)+1, len(actors)+1),dtype=int)
         for i in range(1,len(actors)):
             data[0][i] = actors[i-1]
             data[i][0] = actors[i-1]
         for i in results:
-            row_index = int(i["co_actors"]["actor1"]) - min_actor_id + 1 
-            column_index = int(i["co_actors"]["actor2"]) - min_actor_id + 1
+            row_index = int(i["co_actors"]["actor1"])
+            column_index = int(i["co_actors"]["actor2"])
             data[row_index][column_index] = i["num_films"]
         np.savetxt("report_query2.csv", data, delimiter=",", fmt='%d')
         print("### Finished Writing to report_query2.csv file")

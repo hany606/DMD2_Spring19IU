@@ -82,7 +82,6 @@ class Query1:
                         {"$sort": {"count" : -1} },
                         {"$project": {"customer":"$_id", "num_rented_movies_in_the_current_year":"$count", "_id" : 0} }    
         ]
-        # t = self.db.rental.find(my_query,my_fields)
         a = self.db.rental.aggregate(my_pipeline)
         results = []
         for i in a:
