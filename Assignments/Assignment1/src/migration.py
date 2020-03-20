@@ -4,6 +4,7 @@
 # Sources:
 # - https://stackoverflow.com/questions/10598002/how-do-i-get-tables-in-postgres-using-psycopg2 
 # - https://stackoverflow.com/questions/10252247/how-do-i-get-a-list-of-column-names-from-a-psycopg2-cursor
+# - https://www.tutorialkart.com/mongodb/mongodb-delete-database/
 # ---------------------------------------------------------------------------------------------------
 
 from utils import *

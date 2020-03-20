@@ -13,19 +13,19 @@ settings = get_settings()
 
 client_mngdb, db_mngdb = init_mongodb(settings["host"], settings["database"])
 q = Queries(db_mngdb)
-collection = db_mngdb.customer
+# collection = db_mngdb.customer
 
-# my_query = {{},{ "_id": 0, "first_name": 1}}
+# # my_query = {{},{ "_id": 0, "first_name": 1}}
 
-my_query = {}
-my_fields = { "_id": 0, "first_name": 1}
+# my_query = {}
+# my_fields = { "_id": 0, "first_name": 1}
 
 
-document = collection.find(my_query,my_fields)
+# document = collection.find(my_query,my_fields)
 
-for x in list(document):
-    print(x)
-# q.query(1)
+# for x in list(document):
+#     print(x)
+q.query(1)
 
 
 
