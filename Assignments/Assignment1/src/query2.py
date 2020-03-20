@@ -32,6 +32,7 @@ class Query2:
         print("### Finished Execution of Query {:}".format(self.query_number))
 
     def _query(self,params=None):
+        print("### Starting getting the results of the query")
         my_pipeline = [                       
                         {
                             "$lookup":
