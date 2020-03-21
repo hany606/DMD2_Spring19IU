@@ -2,7 +2,7 @@
 # Author: Hany Hamed
 # Description: Source file for 1st query codes [for Assignment 1 for DMD2 course]
 # Sources:
-# (1). Forgot the link
+# (1). https://stackoverflow.com/questions/4421207/how-to-get-the-last-n-records-in-mongodb
 # (2). https://stackoverflow.com/questions/7651064/create-an-isodate-with-pymongo
 # (3). https://stackoverflow.com/questions/26984799/find-duplicate-records-in-mongodb
 # (4). https://dzone.com/articles/basic-aggregation-mongodb-21
@@ -31,7 +31,19 @@ class Query2:
         self._query()
         print("### Finished Execution of Query {:}".format(self.query_number))
 
+    def get_actors(self):
+        a = self.db.actor.find()
+        self.actor_full = {}
+
+        for i in a:
+            self.actor_full[i["actor_id"]] = i
+        # for i in self.actor_full.keys():
+        #     print("# {:} -> {:}".format(i,self.actor_full[i]))
+
     def _query(self,params=None):
+        print("### Getting the actors ")
+        self.get_actors()
+        print("### Got the actors ")
         print("### Starting getting the results of the query")
         my_pipeline = [                       
                         {
@@ -75,7 +87,7 @@ class Query2:
         actors = list(set(actors))
         # Actor1 as row and Actor2 as column
         data = np.zeros((len(actors)+1, len(actors)+1),dtype=int)
-        for i in range(1,len(actors)):
+        for i in range(1,len(actors)+1):
             data[0][i] = actors[i-1]
             data[i][0] = actors[i-1]
         for i in results:

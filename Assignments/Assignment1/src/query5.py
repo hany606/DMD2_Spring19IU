@@ -2,7 +2,7 @@
 # Author: Hany Hamed
 # Description: Source file for 1st query codes [for Assignment 1 for DMD2 course]
 # Sources:
-# (1). Forgot the link
+# (1). https://stackoverflow.com/questions/4421207/how-to-get-the-last-n-records-in-mongodb
 # (2). https://stackoverflow.com/questions/7651064/create-an-isodate-with-pymongo
 # (3). https://stackoverflow.com/questions/26984799/find-duplicate-records-in-mongodb
 # (4). https://dzone.com/articles/basic-aggregation-mongodb-21
@@ -41,16 +41,17 @@ class Query5:
         print("### Finished Execution of Query {:}".format(self.query_number))
 
     def BFS(self, actor_id, depth, params):
-        print("\n------------ Actor root for the tree: {:} ----------------".format(actor_id))
-        # Children of the root
-        print("Actor children for the root: ",end="")
+        # depth is another way to calculate the degrees of the separation instead of using array memomization
+        # print("\n------------ Actor root for the tree: {:} ----------------".format(actor_id))
+        # print("Actor children for the root: ",end="")
         for i in range(1,len(self.separation_degrees)):
             if(self.separation_degrees[i] > 0 or i == actor_id or i == params["source_actor_id"]):
                 # print("Pass {:}".format(i),end="/")
                 continue
             if(self.costs_matrix[actor_id][i] > 0):
+                # Children of the root
                 self.separation_degrees[i] = 1 + self.separation_degrees[actor_id]
-                print("{:},".format(i),end="")
+                # print("{:},".format(i),end="")
                 self.bfs_queue.append((i,depth))
 
         while (len(self.bfs_queue) > 0):
@@ -58,7 +59,19 @@ class Query5:
             self.BFS(child,depth_local+1, params)
 
         return
+    def get_actors(self):
+        a = self.db.actor.find()
+        self.actor_full = {}
+
+        for i in a:
+            self.actor_full[i["actor_id"]] = i
+        # for i in self.actor_full.keys():
+        #     print("# {:} -> {:}".format(i,self.actor_full[i]))
+
     def _query(self,params=None):
+        print("### Getting the actors ")
+        self.get_actors()
+        print("### Got the actors ")
         print("### Starting getting the results of the query")
         my_pipeline = [                       
                         {
@@ -102,9 +115,8 @@ class Query5:
         actors = list(set(actors))
         # Actor1 as row and Actor2 as column
         self.costs_matrix = np.zeros((len(actors)+1, len(actors)+1),dtype=int)
-        self.separation_degrees = [-1 for i in range(len(actors))]
-        self.modification_counter = len(actors)
-        for i in range(1,len(actors)):
+        self.separation_degrees = [-1 for i in range(len(actors)+1)]
+        for i in range(1,len(actors)+1):
             self.costs_matrix[0][i] = actors[i-1]
             self.costs_matrix[i][0] = actors[i-1]
 
@@ -121,12 +133,13 @@ class Query5:
         self.BFS(params["source_actor_id"],1, params)
         print("### Finished calculating the degrees of seperation")
 
-        mx = 0
+        report = [{} for i in range(len(self.separation_degrees))]
         for i in range(1,len(self.separation_degrees)):
-            mx = max(mx, self.separation_degrees[i])
-            print("# {:} : {:} Degree".format(i,self.separation_degrees[i]))
-            
-        print("Maximum Level of seperation: {:}".format(mx))
+            # print("# {:} : {:} Degree".format(i,self.separation_degrees[i]))
+            report[i] = {"actor_id": i, "separation_degree": self.separation_degrees[i]}
+        print("### Writing the report to report_query5_actor({:}).json file".format(params["source_actor_id"]))
+        with open("report_query5_actor({:}).json".format(params["source_actor_id"]),"w") as f:
+            json.dump(report[1:],f,indent=4)
 
 if __name__ == "__main__":
     from utils import *

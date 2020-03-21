@@ -1,0 +1,802 @@
+[
+    {
+        "actor_id": 1,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 2,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 3,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 4,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 5,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 6,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 7,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 8,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 9,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 10,
+        "separation_degree": 0
+    },
+    {
+        "actor_id": 11,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 12,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 13,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 14,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 15,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 16,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 17,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 18,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 19,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 20,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 21,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 22,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 23,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 24,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 25,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 26,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 27,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 28,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 29,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 30,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 31,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 32,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 33,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 34,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 35,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 36,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 37,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 38,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 39,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 40,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 41,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 42,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 43,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 44,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 45,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 46,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 47,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 48,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 49,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 50,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 51,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 52,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 53,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 54,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 55,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 56,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 57,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 58,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 59,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 60,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 61,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 62,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 63,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 64,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 65,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 66,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 67,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 68,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 69,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 70,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 71,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 72,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 73,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 74,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 75,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 76,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 77,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 78,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 79,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 80,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 81,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 82,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 83,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 84,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 85,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 86,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 87,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 88,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 89,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 90,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 91,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 92,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 93,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 94,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 95,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 96,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 97,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 98,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 99,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 100,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 101,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 102,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 103,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 104,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 105,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 106,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 107,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 108,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 109,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 110,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 111,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 112,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 113,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 114,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 115,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 116,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 117,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 118,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 119,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 120,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 121,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 122,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 123,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 124,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 125,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 126,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 127,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 128,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 129,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 130,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 131,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 132,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 133,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 134,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 135,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 136,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 137,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 138,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 139,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 140,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 141,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 142,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 143,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 144,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 145,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 146,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 147,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 148,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 149,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 150,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 151,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 152,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 153,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 154,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 155,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 156,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 157,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 158,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 159,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 160,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 161,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 162,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 163,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 164,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 165,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 166,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 167,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 168,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 169,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 170,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 171,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 172,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 173,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 174,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 175,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 176,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 177,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 178,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 179,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 180,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 181,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 182,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 183,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 184,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 185,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 186,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 187,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 188,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 189,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 190,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 191,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 192,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 193,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 194,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 195,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 196,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 197,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 198,
+        "separation_degree": 1
+    },
+    {
+        "actor_id": 199,
+        "separation_degree": 2
+    },
+    {
+        "actor_id": 200,
+        "separation_degree": 2
+    }
+]

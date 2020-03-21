@@ -8,26 +8,27 @@
 
 from Queries import Queries
 from utils import *
+import time
 
 settings = get_settings()
 
 client_mngdb, db_mngdb = init_mongodb(settings["host"], settings["database"])
 q = Queries(db_mngdb)
-# collection = db_mngdb.customer
-
-# # my_query = {{},{ "_id": 0, "first_name": 1}}
-
-# my_query = {}
-# my_fields = { "_id": 0, "first_name": 1}
-
-
-# document = collection.find(my_query,my_fields)
-
-# for x in list(document):
-#     print(x)
-q.query(1)
-
-
-
+while(True):
+    q_num = int(input("Enter number of the query:"))
+    if(q_num == -1 or q_num > 5):
+        print("Finish !!")
+        break
+    params = {}
+    if(q_num == 4):
+        params["customer_id"] = int(input("Enter Cutomer_id: "))
+    if(q_num == 5):
+        params["source_actor_id"] = int(input("Enter Actor_id: "))
+        
+    time1 = time.time()
+    q.query(q_num, params=params)
+    print("############ Statistics ############")
+    print("Time taken to finish to {:}th query ::: {:.4f}s".format(q_num,time.time()-time1))
+    print("####################################")
 
 client_mngdb.close()

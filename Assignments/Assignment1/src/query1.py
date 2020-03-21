@@ -2,7 +2,7 @@
 # Author: Hany Hamed
 # Description: Source file for 1st query codes [for Assignment 1 for DMD2 course]
 # Sources:
-# (1). Forgot the link
+# (1). https://stackoverflow.com/questions/4421207/how-to-get-the-last-n-records-in-mongodb
 # (2). https://stackoverflow.com/questions/7651064/create-an-isodate-with-pymongo
 # (3). https://stackoverflow.com/questions/26984799/find-duplicate-records-in-mongodb
 # (4). https://dzone.com/articles/basic-aggregation-mongodb-21
@@ -13,6 +13,8 @@
 from utils import *
 from datetime import datetime
 import pprint
+import json
+from bson.json_util import dumps
 
 
 class Query1:
@@ -55,6 +57,9 @@ class Query1:
                             }
                         },
                         {
+                            "$unwind":"$customer"
+                        },
+                        {
                             "$match": 
                             {
                                 "rental_date": 
@@ -85,11 +90,18 @@ class Query1:
         a = self.db.rental.aggregate(my_pipeline)
         results = []
         for i in a:
-            results.append(i)
+            tmp_dict = {i["customer"]["customer_id"]:i}
+            results.append(tmp_dict)
             print("---------------------------------")
             self.pp.pprint(i)
             print("---------------------------------")
-        print(len(results))
+        print("# {:} Customers that satisfied the query".format(len(results)))
+        print("### Writing the report to report_query1.json file")
+        with open("report_query1.json","w") as f:
+            for i in results:
+                # Source: https://stackoverflow.com/questions/16586180/typeerror-objectid-is-not-json-serializable
+                tmp = dumps(i)
+                json.dump(tmp,f)
 
 
 if __name__ == "__main__":

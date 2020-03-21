@@ -2,7 +2,7 @@
 # Author: Hany Hamed
 # Description: Source file for 1st query codes [for Assignment 1 for DMD2 course]
 # Sources:
-# (1). Forgot the link
+# (1). https://stackoverflow.com/questions/4421207/how-to-get-the-last-n-records-in-mongodb
 # (2). https://stackoverflow.com/questions/7651064/create-an-isodate-with-pymongo
 # (3). https://stackoverflow.com/questions/26984799/find-duplicate-records-in-mongodb
 # (4). https://dzone.com/articles/basic-aggregation-mongodb-21
