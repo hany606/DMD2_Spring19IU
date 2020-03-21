@@ -33,29 +33,30 @@ class Query5:
         self.db = db
         self.pp = pprint.PrettyPrinter()
         self.query_number = 5
+        self.bfs_queue = []
 
     def execute(self, params=None):
         print("### Executing Query {:}".format(self.query_number))
         self._query(params=params)
         print("### Finished Execution of Query {:}".format(self.query_number))
 
-    def BFS(self, actor_id):
-        print("------------ Actor_root")
+    def BFS(self, actor_id, depth, params):
+        print("\n------------ Actor root for the tree: {:} ----------------".format(actor_id))
+        # Children of the root
+        print("Actor children for the root: ",end="")
         for i in range(1,len(self.separation_degrees)):
-            if(i == actor_id):
-                self.separation_degrees[i] = 0
+            if(self.separation_degrees[i] > 0 or i == actor_id or i == params["source_actor_id"]):
+                # print("Pass {:}".format(i),end="/")
                 continue
+            if(self.costs_matrix[actor_id][i] > 0):
+                self.separation_degrees[i] = 1 + self.separation_degrees[actor_id]
+                print("{:},".format(i),end="")
+                self.bfs_queue.append((i,depth))
 
-            if(self.separation_degrees[i] == -1):
-                self.separation_degrees[i] = self.costs_matrix[actor_id][i]
-                self.modification_counter -= 1
-                if(self.modification_counter == 0):
-                    return
-                continue
-            if(self.modification_counter == 0):
-                return
+        while (len(self.bfs_queue) > 0):
+            child,depth_local = self.bfs_queue.pop(0)
+            self.BFS(child,depth_local+1, params)
 
-            self.BFS(i)
         return
     def _query(self,params=None):
         print("### Starting getting the results of the query")
@@ -113,12 +114,19 @@ class Query5:
             if(row_index == column_index):
                 continue
             self.costs_matrix[row_index][column_index] = i["num_films"]
-        
-        print("### Starting calculating the degrees of seperation")
-        self.BFS(params["source_actor_id"])
-        print("### Finished calculating the degrees of seperation")
-            
 
+        # self.costs_matrix[row_index][column_index] = i["num_films"]
+        self.separation_degrees[params["source_actor_id"]] = 0 
+        print("### Starting calculating the degrees of seperation")
+        self.BFS(params["source_actor_id"],1, params)
+        print("### Finished calculating the degrees of seperation")
+
+        mx = 0
+        for i in range(1,len(self.separation_degrees)):
+            mx = max(mx, self.separation_degrees[i])
+            print("# {:} : {:} Degree".format(i,self.separation_degrees[i]))
+            
+        print("Maximum Level of seperation: {:}".format(mx))
 
 if __name__ == "__main__":
     from utils import *
