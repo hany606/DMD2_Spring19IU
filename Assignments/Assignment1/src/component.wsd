@@ -1,0 +1,39 @@
+@startuml
+
+package "Client Interface" {
+  [Query Number]
+}
+ 
+node "Python Process" {
+  CommandLine - [Query Processing]
+  [Query Number] --> CommandLine
+
+} 
+
+node "Migration Python Process" {
+  [Running restore.sql] --> [Query all records]
+  [Query all records] --> [Adding All Records]
+
+
+} 
+
+database "MongoDB" {
+  frame "Tables NoSQL" {
+	[Current Frame]
+  }
+}
+
+database "Postgres" {
+  frame "Tables SQL" {
+	  [Current Frame ]
+  }
+}
+
+
+[Query Processing] --> [Current Frame]
+[Running restore.sql] --> [Current Frame ]
+[Query all records] --> [Current Frame ]
+[Adding All Records] --> [Current Frame]
+
+
+@enduml

@@ -1,6 +1,8 @@
 # SourcCodes
 
-(1) Execute ``` sudo -u postgres psql -U postgres -d dvdrental -f ../assignment_assests/dvdrental-database/postgree/restore.sql ```
+(0) Open restore.sql and modify the paths of .dat files
+
+(1) Execute ``` sudo -u postgres psql -U postgres -d dvdrental -f <YOUR_PATH>/restore.sql ```
 
 (2) Execute ```mongod```
 

@@ -1,0 +1,8 @@
+// Fill the dictionary with your values and rename the file to settings.json
+{
+    "user": "",
+    "password": "",
+    "host": "",
+    "port": "",
+    "database": ""
+}

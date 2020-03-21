@@ -11,48 +11,26 @@
 # (7). https://docs.mongodb.com/manual/reference/operator/aggregation/unwind/
 # (8). https://realpython.com/python-csv/
 # (9). https://stackoverflow.com/questions/209840/convert-two-lists-into-a-dictionary
-# (10). https://stackabuse.com/reading-and-writing-json-to-a-file-in-python/
 # ---------------------------------------------------------------------------------------------------
-
 
 from utils import *
 from datetime import datetime
 import pprint
-import json
+import csv
 import numpy as np
 
 
-class Query5:
+class Query2:
     def __init__(self,db):
         self.db = db
         self.pp = pprint.PrettyPrinter()
-        self.query_number = 5
-        self.bfs_queue = []
+        self.query_number = 2
 
     def execute(self, params=None):
         print("### Executing Query {:}".format(self.query_number))
-        self._query(params=params)
+        self._query()
         print("### Finished Execution of Query {:}".format(self.query_number))
 
-    def BFS(self, actor_id, depth, params):
-        # depth is another way to calculate the degrees of the separation instead of using array memomization
-        # print("\n------------ Actor root for the tree: {:} ----------------".format(actor_id))
-        # print("Actor children for the root: ",end="")
-        for i in range(1,len(self.separation_degrees)):
-            if(self.separation_degrees[i] > 0 or i == actor_id or i == params["source_actor_id"]):
-                # print("Pass {:}".format(i),end="/")
-                continue
-            if(self.costs_matrix[actor_id][i] > 0):
-                # Children of the root
-                self.separation_degrees[i] = 1 + self.separation_degrees[actor_id]
-                # print("{:},".format(i),end="")
-                self.bfs_queue.append((i,depth))
-
-        while (len(self.bfs_queue) > 0):
-            child,depth_local = self.bfs_queue.pop(0)
-            self.BFS(child,depth_local+1, params)
-
-        return
     def get_actors(self):
         a = self.db.actor.find()
         self.actor_full = {}
@@ -108,32 +86,20 @@ class Query5:
         print("### Starting write the report in form of table in csv")
         actors = list(set(actors))
         # Actor1 as row and Actor2 as column
-        self.costs_matrix = np.zeros((len(actors)+1, len(actors)+1),dtype=int)
-        self.separation_degrees = [-1 for i in range(len(actors)+1)]
+        data = np.zeros((len(actors)+1, len(actors)+1),dtype=int)
         for i in range(1,len(actors)+1):
-            self.costs_matrix[0][i] = actors[i-1]
-            self.costs_matrix[i][0] = actors[i-1]
-
+            data[0][i] = actors[i-1]
+            data[i][0] = actors[i-1]
         for i in results:
             row_index = int(i["co_actors"]["actor1"])
             column_index = int(i["co_actors"]["actor2"])
-            if(row_index == column_index):
-                continue
-            self.costs_matrix[row_index][column_index] = i["num_films"]
+            data[row_index][column_index] = i["num_films"]
+        np.savetxt("report_query2.csv", data, delimiter=",", fmt='%d')
+        print("### Finished Writing to report_query2.csv file")
 
-        # self.costs_matrix[row_index][column_index] = i["num_films"]
-        self.separation_degrees[params["source_actor_id"]] = 0 
-        print("### Starting calculating the degrees of seperation")
-        self.BFS(params["source_actor_id"],1, params)
-        print("### Finished calculating the degrees of seperation")
 
-        report = [{} for i in range(len(self.separation_degrees))]
-        for i in range(1,len(self.separation_degrees)):
-            # print("# {:} : {:} Degree".format(i,self.separation_degrees[i]))
-            report[i] = {"actor_id": i, "separation_degree": self.separation_degrees[i]}
-        print("### Writing the report to report_query5_actor({:}).json file".format(params["source_actor_id"]))
-        with open("report_query5_actor({:}).json".format(params["source_actor_id"]),"w") as f:
-            json.dump(report[1:],f,indent=4)
+
+
 
 if __name__ == "__main__":
     from utils import *
@@ -141,5 +107,5 @@ if __name__ == "__main__":
     settings = get_settings()
 
     client_mngdb, db_mngdb = init_mongodb(settings["host"], settings["database"])
-    q = Query5(db_mngdb)
-    q.execute(params={"source_actor_id":10})
+    q = Query2(db_mngdb)
+    q.execute()
