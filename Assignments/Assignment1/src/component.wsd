@@ -12,28 +12,28 @@ node "Python Process" {
 
 node "Migration Python Process" {
   [Running restore.sql] --> [Query all records]
-  [Query all records] --> [Adding All Records]
+  [Query all records] --> [Adding all records]
 
 
 } 
 
 database "MongoDB" {
-  frame "Tables NoSQL" {
-	[Current Frame]
+  frame "Collections NoSQL" {
+	[Collections (Current DB Snapshot)]
   }
 }
 
 database "Postgres" {
   frame "Tables SQL" {
-	  [Current Frame ]
+	  [Tables (Current DB Snapshot) ]
   }
 }
 
 
-[Query Processing] --> [Current Frame]
-[Running restore.sql] --> [Current Frame ]
-[Query all records] --> [Current Frame ]
-[Adding All Records] --> [Current Frame]
+[Query Processing] --> [Collections (Current DB Snapshot)]
+[Running restore.sql] --> [Tables (Current DB Snapshot) ]
+[Query all records] --> [Tables (Current DB Snapshot) ]
+[Adding all records] --> [Collections (Current DB Snapshot)]
 
 
 @enduml
