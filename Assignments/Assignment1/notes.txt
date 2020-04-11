@@ -1,2 +1,0 @@
-3- Write the queries for mongodb
-4- Write the report
